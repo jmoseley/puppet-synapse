@@ -1,6 +1,13 @@
 {
   "service_conf_dir": "<%= scope.lookupvar('synapse::config_dir') %>",
   "haproxy": {
+    "shared_frontend": [
+      "bind 0.0.0.0:80",
+      "option forwardfor",
+      "option http-server-close",
+      "errorfile 403 /etc/haproxy/errors/403.http",
+      "errorfile 503 /etc/haproxy/errors/503.http"
+    ],
     "bind_address": "<%= @haproxy_bind_address %>",
     "reload_command": "<%= @haproxy_reload_command %>",
     "config_file_path": "/etc/haproxy/haproxy.cfg",
